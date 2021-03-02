@@ -3,7 +3,13 @@ const startTransitions = ['typed', 'auto_bookmark', 'generated', 'keyword', 'key
 
 function domainName(url) {
     let capture = url.match(/https?:\/\/([^:\/]+)[:\/]/);
+    // TODO return null if IP
     return capture ? capture[1] : null;
+}
+
+function topLevel(dn) {
+    let i = dn.lastIndexOf('.');
+    return dn.substring(i + 1);
 }
 
 function visits(url, begin, end) {
@@ -32,17 +38,21 @@ function navigation(begin, end) {
         let dns = [];
         let nav = [];
 
+        let inc = 0;
+
         let promises = h.map(item => {
             let dn = domainName(item.url);
             itemIndex[item.id] = dn;
     
+            // TODO replay history with the same profile (cookies) and monitor network
+
             if (dn) {
                 if (!dnIndex[dn]) {
-                    let dnObj = { dn: dn, pages: 0 };
+                    let dnObj = { id: inc++, dn: dn, pages: 0 };
                     dnIndex[dn] = dnObj;
                     dns.push(dnObj);
                 }
-    
+
                 dnIndex[dn].pages++;
     
                 return visits(item.url, begin, end)
@@ -64,8 +74,8 @@ function navigation(begin, end) {
 
                     if (from) {
                         nav.push({
-                            from: itemIndex[from.id],
-                            to: itemIndex[to.id],
+                            from: dnIndex[itemIndex[from.id]].id,
+                            to: dnIndex[itemIndex[to.id]].id,
                             hctl: transition,
                             t: to.visitTime
                         });
@@ -85,4 +95,16 @@ function navigation(begin, end) {
             };
         });
     });
+}
+
+function anonymized(graph) {
+    // keep only top-level domain name,
+    // look for 'alias'|'official website' and extract 'instance of' 
+
+    graph.nodes.forEach(n => {
+        n.dn = '*.' + topLevel(n.dn);
+        // TODO SPARQL query
+    });
+
+    return graph; // TODO graph is modified in place. Is necessary?
 }

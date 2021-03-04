@@ -1,6 +1,12 @@
 const hypermediaTransitions = ['link', 'form_submitted', 'auto_subframe', 'manual_subframe'];
 const startTransitions = ['typed', 'auto_bookmark', 'generated', 'keyword', 'keyword_generated'];
 
+// TODO include skos:prefLabel|skos:altLabel (makes Wikidata endpoint crash?)
+const typeQuery = 'select distinct ?type where {\
+  values ?url { <http://{dn}> <http://{dn}/> <https://{dn}> <https://{dn}/> }\
+  ?e wdt:P856 ?url ; wdt:P31 ?type .\
+}';
+
 function domainName(url) {
     let capture = url.match(/https?:\/\/([^:\/]+)[:\/]/);
     // TODO return null if IP
@@ -11,6 +17,28 @@ function topLevel(dn) {
     let i = dn.lastIndexOf('.');
     return dn.substring(i + 1);
 }
+
+function type(dn) {
+    let q = encodeURI(typeQuery.replace(/\{dn\}/g, dn));
+
+    return fetch(`https://query.wikidata.org/sparql?query=${q}`, {
+        headers: {
+            'User-Agent': 'web-nav-window/v1 (https://github.com/vcharpenay/web-nav-window)',
+            'Accept': 'application/sparql-results+json'
+        }
+    })
+
+    // TODO check status code
+    // TODO if 429, check Retry-After and wait before retrying
+    .then(res => res.json())
+
+    .then(json => {
+        return json.results.bindings.map(b => b.type.value.replace('http://www.wikidata.org/entity/', ''));
+    });
+}
+
+type('www.youtube.com')
+.then(t => console.log(t));
 
 function visits(url, begin, end) {
     return browser.history.getVisits({ url: url })
@@ -98,12 +126,20 @@ function navigation(begin, end) {
 }
 
 function anonymized(graph) {
+    webnav.log('Anonymize navigation graph...\n'
+        + '\t1. Retrieve website class on Wikidata, if any'
+        + '\t2. Keep only top-level domain names and website class');
+
     // keep only top-level domain name,
     // look for 'alias'|'official website' and extract 'instance of' 
 
     graph.nodes.forEach(n => {
-        n.dn = '*.' + topLevel(n.dn);
-        // TODO SPARQL query
+        let dn = n.dn;
+
+        // TODO type(dn).then();
+        // TODO use a promise chain to make sure Retry-After is properly processed.
+
+        n.dn = '*.' + topLevel(dn);
     });
 
     return graph; // TODO graph is modified in place. Is necessary?

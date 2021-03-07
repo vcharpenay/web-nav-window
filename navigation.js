@@ -21,24 +21,52 @@ function topLevel(dn) {
 function type(dn) {
     let q = encodeURI(typeQuery.replace(/\{dn\}/g, dn));
 
-    return fetch(`https://query.wikidata.org/sparql?query=${q}`, {
-        headers: {
-            'User-Agent': 'web-nav-window/v1 (https://github.com/vcharpenay/web-nav-window)',
-            'Accept': 'application/sparql-results+json'
+    let attempts = 0;
+
+    let request = i => {
+        if (i > 2) {
+            webnav.log(`Too many attempts at reaching Wikidata for ${dn}, giving up...`);
+            return Promise.resolve(null);
+        } else {
+            return fetch(`https://query.wikidata.org/sparql?query=${q}`, {
+                headers: {
+                    'User-Agent': 'web-nav-window/v1 (https://github.com/vcharpenay/web-nav-window)',
+                    'Accept': 'application/sparql-results+json'
+                }
+            });
+        }
+    };
+
+    return request(attempts)
+
+    .then(res => {
+        // OK
+        if (res.ok) return res;
+
+        // Too many requests
+        if (res.status == 429) {
+            return new Promise((resolve, reject) => {
+                let delay = Number(res.headers['Retry-After']) || 60;
+
+                webnav.log(`Reached Wikidata's query limit rate, retrying in ${delay}s...`);
+
+                setTimeout(() => {
+                    return request(++attempts)
+                    .then(res => resolve(res));
+                }, delay * 1200); // x1.2 server-defined delay
+            });
+        } else {
+            webnav.log(`Got unexpected response status from Wikidata: ${res.status} ${res.statusText}.`);
         }
     })
 
-    // TODO check status code
-    // TODO if 429, check Retry-After and wait before retrying
-    .then(res => res.json())
+    .then(res => res ? res.json() : null)
 
     .then(json => {
-        return json.results.bindings.map(b => b.type.value.replace('http://www.wikidata.org/entity/', ''));
+        if (!json) return null;
+        else return json.results.bindings.map(b => b.type.value.replace('http://www.wikidata.org/entity/', ''));
     });
 }
-
-type('www.youtube.com')
-.then(t => console.log(t));
 
 function visits(url, begin, end) {
     return browser.history.getVisits({ url: url })
@@ -127,20 +155,24 @@ function navigation(begin, end) {
 
 function anonymized(graph) {
     webnav.log('Anonymize navigation graph...\n'
-        + '\t1. Retrieve website class on Wikidata, if any'
+        + '\t1. Retrieve website class on Wikidata, if any\n'
         + '\t2. Keep only top-level domain names and website class');
 
-    // keep only top-level domain name,
-    // look for 'alias'|'official website' and extract 'instance of' 
+    let promises = [];
 
     graph.nodes.forEach(n => {
         let dn = n.dn;
 
-        // TODO type(dn).then();
-        // TODO use a promise chain to make sure Retry-After is properly processed.
+        let p = type(dn)
+        .then(t => {
+            n.type = t;
+            webnav.log(`Found the following types for ${dn}: ${t}.`);
+        });
+
+        promises.push(p);
 
         n.dn = '*.' + topLevel(dn);
     });
 
-    return graph; // TODO graph is modified in place. Is necessary?
+    return Promise.all(promises).then(() => graph); // TODO graph is modified in place. Is necessary?
 }

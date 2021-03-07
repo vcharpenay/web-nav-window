@@ -56,6 +56,7 @@ renderCtl.onclick = () => {
     let promise = null;
 
     if (webnav.graph) {
+        // TODO and if not anonymized or dates have changed...
         promise = Promise.resolve();
     } else {
         let begin = new Date(beginCtl.value);
@@ -72,7 +73,10 @@ renderCtl.onclick = () => {
 anonCtl.onclick = () => {
     let g = webnav.graph;
     if (g) {
-        webnav.graph = anonymized(g);
-        renderCtl.onclick();
+        anonymized(g)
+
+        .then(anon => webnav.graph = anon)
+
+        .then(() => renderCtl.onclick());
     }
 };

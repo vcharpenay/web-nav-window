@@ -44,6 +44,13 @@ function render(e, g) {
     let options = {
         nodes: {
             shape: 'dot'
+        },
+        edges: {
+            arrows: {
+                to: {
+                    enabled: true
+                }
+            }
         }
     };
 
@@ -52,11 +59,26 @@ function render(e, g) {
     let network = new vis.Network(e, data, options);
 }
 
+beginCtl.onchange = () => {
+    let begin = new Date(beginCtl.value);
+    let end = new Date(endCtl.value);
+
+    if (begin > end) {
+        let toString = d => d.toISOString().split('T')[0];
+
+        beginCtl.value = toString(end);
+        endCtl.value = toString(begin);
+    }
+
+    webnav.graph = null; // refresh navigation graph
+};
+
+endCtl.onchange = beginCtl.onchange;
+
 renderCtl.onclick = () => {
     let promise = null;
 
     if (webnav.graph) {
-        // TODO and if not anonymized or dates have changed...
         promise = Promise.resolve();
     } else {
         let begin = new Date(beginCtl.value);

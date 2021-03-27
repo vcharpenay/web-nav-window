@@ -16,9 +16,12 @@
         "util.js",
         "navigation.js",
         "network.js",
-        "lib/vis-network.min.js"
+        "lib/vis-network.min.js",
+        "lib/uri.all.min.js"
     ],
     "background": {
-        "scripts": ["background.js"]
+        "scripts": [
+            "background.js"
+        ]
     }
 }

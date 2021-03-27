@@ -23,7 +23,7 @@
        inkscape:collect="always"
        id="linearGradient980">
       <stop
-         style="stop-color:#61259e;stop-opacity:1"
+         style="stop-color:#5a5a5a;stop-opacity:1"
          offset="0"
          id="stop976" />
       <stop
@@ -40,7 +40,17 @@
        x2="37.041668"
        y2="254.66666"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-4.3961589e-6,-1.6857682e-5)" />
+       gradientTransform="translate(1.4174063,-0.18900495)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient980"
+       id="linearGradient845"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(1.4174063,-1.275e-5)"
+       x1="15.875"
+       y1="286.41666"
+       x2="37.041668"
+       y2="254.66666" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -49,9 +59,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="78.201763"
-     inkscape:cy="93.182599"
+     inkscape:zoom="1.979899"
+     inkscape:cx="29.871127"
+     inkscape:cy="150.97601"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -84,67 +94,75 @@
      id="layer1"
      transform="translate(0,-244.08332)">
     <ellipse
-       style="fill:url(#linearGradient982);fill-opacity:1;stroke:#000000;stroke-width:10.58333302;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:url(#linearGradient845);fill-opacity:1;stroke:#000000;stroke-width:10.58333302;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path817-0"
-       cx="26.458334"
+       cx="27.875744"
        cy="270.54166"
        rx="19.474064"
        ry="19.422632" />
     <ellipse
        style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:2.3045361;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path817-0-7"
-       cx="26.479889"
+       cx="27.897299"
        cy="251.07095"
        rx="1.6325641"
        ry="1.6282524" />
     <ellipse
        style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:2.30453634;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path817-0-7-2"
-       cx="26.479891"
+       cx="27.897301"
        cy="289.90799"
        rx="1.6325641"
        ry="1.6282524" />
     <ellipse
        style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:2.30453634;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path817-0-7-1"
-       cx="7.1086082"
+       cx="8.5260191"
        cy="270.53671"
        rx="1.6325641"
        ry="1.6282524" />
     <ellipse
        style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:2.30453634;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path817-0-7-3"
-       cx="45.756676"
+       cx="47.174088"
        cy="270.63123"
        rx="1.6325641"
        ry="1.6282524" />
     <ellipse
        style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:2.30453634;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path817-0-7-21"
-       cx="12.49477"
+       cx="13.912181"
        cy="257.11859"
        rx="1.6325641"
        ry="1.6282524" />
     <ellipse
        style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:2.30453634;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path817-0-7-5"
-       cx="40.653996"
+       cx="42.071407"
        cy="257.02408"
        rx="1.6325641"
        ry="1.6282524" />
     <ellipse
        style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:2.30453634;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path817-0-7-9"
-       cx="40.899681"
+       cx="42.317093"
        cy="284.04938"
        rx="1.6325641"
        ry="1.6282524" />
     <ellipse
        style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:2.30453634;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path817-0-7-91"
-       cx="13.28852"
+       cx="14.705931"
        cy="284.57855"
        rx="1.6325641"
        ry="1.6282524" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.59000015;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect856"
+       width="1.3229166"
+       height="15.875013"
+       x="1.8520833"
+       y="262.60416"
+       ry="0.66145831" />
   </g>
 </svg>

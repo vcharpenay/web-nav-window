@@ -9,6 +9,28 @@
     <script type="text/javascript" src="lib/vis-network.min.js"></script>
     <script type="text/javascript" src="lib/uri.all.min.js"></script>
     <style type="text/css">
+        body {
+            font-family: monospace;
+        }
+
+        .btn {
+            padding: 5pt;
+            border: 0;
+            border-right: 5pt solid darkorange;
+            background-color: orange;
+            font-family: monospace;
+        }
+
+        .btn:hover {
+            color: saddlebrown;
+        }
+
+        .btn:active {
+            background-color: darkorange;
+            border-right: 0;
+            border-left: 5pt solid white;
+        }
+
         #nav-graph {
             position: absolute;
             top: 0;
@@ -37,8 +59,8 @@
         <input id="begin-control" type="date" value="2020-02-01">
         <span>To</span>
         <input id="end-control" type="date" value="2020-02-02">
-        <input id="render-control" type="button" value="Render">
-        <input id="anonymize-control" type="button" value="Anonymize">
+        <input id="render-control" type="button" value="Render" class="btn">
+        <input id="anonymize-control" type="button" value="Anonymize" class="btn">
     </div>
     <script type="text/javascript" src="network.js"></script>
 </body>

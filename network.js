@@ -2,6 +2,7 @@ const container = document.getElementById('nav-graph');
 const beginCtl = document.getElementById('begin-control');
 const endCtl = document.getElementById('end-control');
 const renderCtl = document.getElementById('render-control');
+const renderMsg = document.getElementById('render-message');
 const anonCtl = document.getElementById('anonymize-control');
 
 // TODO if end is before begin, set to a later day
@@ -76,20 +77,26 @@ beginCtl.onchange = () => {
 endCtl.onchange = beginCtl.onchange;
 
 renderCtl.onclick = () => {
-    let promise = null;
+    let promise = Promise.resolve()
 
-    if (webnav.graph) {
-        promise = Promise.resolve();
-    } else {
-        let begin = new Date(beginCtl.value);
-        let end = new Date(endCtl.value);
+    .then(() => renderMsg.hidden = false)
 
-        promise = navigation(begin, end)
+    .then(() => {
+        if (webnav.graph) {
+            return Promise.resolve();
+        } else {
+            let begin = new Date(beginCtl.value);
+            let end = new Date(endCtl.value);
 
-        .then(g => webnav.graph = g);
-    }
+            return navigation(begin, end)
 
-    promise.then(() => render(container, webnav.graph));
+            .then(g => webnav.graph = g);
+        }
+    })
+
+    .then(() => render(container, webnav.graph))
+    
+    .then(() => renderMsg.hidden = true);
 };
 
 anonCtl.onclick = () => {

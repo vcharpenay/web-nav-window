@@ -4,8 +4,12 @@ const endCtl = document.getElementById('end-control');
 const renderCtl = document.getElementById('render-control');
 const renderMsg = document.getElementById('render-message');
 const anonCtl = document.getElementById('anonymize-control');
-
-// TODO if end is before begin, set to a later day
+const contribCtl = document.getElementById('contribute-control');
+const contribData = document.getElementById('contribute-data');
+const overlay = document.getElementById('overlay');
+const copyCtl = document.getElementById('modal-copy-control');
+const copyMsg = document.getElementById('modal-copy-message');
+const closeCtl = document.getElementById('modal-close-control');
 
 function render(e, g) {
     webnav.log('Build view from navigation graph...');
@@ -58,6 +62,8 @@ function render(e, g) {
     webnav.log('Render view...');
     
     let network = new vis.Network(e, data, options);
+
+    // TODO get notified when layouting has finished 
 }
 
 beginCtl.onchange = () => {
@@ -77,7 +83,7 @@ beginCtl.onchange = () => {
 endCtl.onchange = beginCtl.onchange;
 
 renderCtl.onclick = () => {
-    let promise = Promise.resolve()
+    Promise.resolve()
 
     .then(() => renderMsg.hidden = false)
 
@@ -101,6 +107,7 @@ renderCtl.onclick = () => {
 
 anonCtl.onclick = () => {
     let g = webnav.graph;
+
     if (g) {
         anonymized(g)
 
@@ -108,4 +115,33 @@ anonCtl.onclick = () => {
 
         .then(() => renderCtl.onclick());
     }
+};
+
+contribCtl.onclick = () => {
+    overlay.hidden = false;
+
+    if (contribData.textContent.length == 0) {
+        let begin = new Date("2020-03-01");
+        let end = new Date("2020-03-31");
+
+        navigation(begin, end)
+
+        .then(g => anonymized(g))
+    
+        .then(g => {
+            contribData.textContent = JSON.stringify(g);
+            copyCtl.disabled = false;
+        });
+    }
+};
+
+copyCtl.onclick = () => {
+    navigator.clipboard.writeText(contribData.textContent)
+    
+    .then(() => copyMsg.hidden = false);
+};
+
+closeCtl.onclick = () => {
+    overlay.hidden = true;
+    copyMsg.hidden = true;
 };

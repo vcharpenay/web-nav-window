@@ -21,11 +21,11 @@
             font-family: monospace;
         }
 
-        .btn:hover {
+        .btn:hover:enabled {
             color: saddlebrown;
         }
 
-        .btn:active {
+        .btn:active:enabled {
             background-color: darkorange;
             border-right: 0;
             border-left: 5pt solid white;
@@ -36,7 +36,7 @@
             top: 0;
             bottom: 0;
             left: 0;
-            max-width: 640px;
+            max-width: 420px;
             margin: 10px;
         }
 
@@ -44,7 +44,7 @@
             position: absolute;
             top: 0;
             bottom: 50px;
-            left: calc(640px + 10px);
+            left: calc(420px + 10px);
             right: 0;
             margin: 10px;
             border: 1px solid lightgray;
@@ -53,10 +53,40 @@
         #controls {
             position: absolute;
             bottom: 0;
-            left: calc(640px + 10px);
+            left: calc(420px + 10px);
             right: 0;
             margin: 10px;
             height: 40px;
+        }
+
+        #overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(50, 50, 50, 0.2);
+        }
+
+        #modal {
+            max-width: 420px;
+            margin-top: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: white;
+            padding: 10px;
+        }
+
+        #contribute-data {
+            resize: none;
+        }
+
+        #modal-close-control {
+            width: 100%;
+            display: inline-block;
+            text-align: right;
+            text-decoration: underline;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -68,20 +98,31 @@
         <p>
             The Web navigation window is a "window" to the way you navigate on
             the Web. It is a browser extension that visualizes your browser
-            history as a graph, so that you can see what paths you take on the
-            Web, on which website they start and how they end.
+            history as a graph. By following the paths you take on the Web, you
+            can see what website you visit the most, where your navigation
+            usually starts and how it ends.
         </p>
         <p>
             This extension is also part of a research project on hypermedia
-            systems, whose objective is to collect navigation data from human
-            browser histories to compare them with the history of
-            autonoumous Web agents ("bots").
+            systems, whose objective is to collect (anonymized) navigation data.
+            This navigation data will then be analized to compare human browsing
+            behaviors with the behavior of autonoumous Web agents ("bots").
         </p>
         <h2>How does it work?</h2>
+        <ol>
+            <li>
+                Select a time period (with the date pickers at the bottom of the
+                page) and click "Render".
+            </li>
+            <li>
+                After some processing time, you should see a graph appear in the
+                main panel. Zoom in and out (mouse wheel) and drag the graph
+                around (left click) to explore.
+            </li>
+        </ol>
         <p>
-            Select a time period (at the bottom of the page) and click "Render".
-            Then, you should see a graph appear. You can zoom in/out and browse
-            the graph.
+            <em>Warning</em>: processing your history over long periods of time
+            (one month or longer) may take some time.
         </p>
         <h2>How to interpret the graph?</h2>
         <p>
@@ -92,6 +133,7 @@
             website.
         </p>
     </div>
+    <!-- TODO reactive UI: if small screen: graph below explainer -->
     <div id="nav-graph"></div>
     <div id="controls">
         <span>From</span>
@@ -100,8 +142,38 @@
         <input id="end-control" type="date" value="2020-02-02">
         <input id="render-control" type="button" value="Render" class="btn">
         <input id="anonymize-control" type="button" value="Anonymize" class="btn">
-        <input id="contribute-control" type="button" value="Contribute!" class="btn" disabled>
+        <input id="contribute-control" type="button" value="Contribute!" class="btn">
         <span id="render-message" hidden>Rendering...</span>
+    </div>
+    <div id="overlay" hidden>
+        <div id="modal">
+            <span id="modal-close-control">Close</span>
+            <br>
+            <p>
+                To contribute, you can share a fragment of your (anonymized)
+                browser history.
+            </p>
+            <ol>
+                <li>
+                    <p>
+                        Copy the raw data below to clipboard. It corresponds to your
+                        navigation data extracted from your browser over the period
+                        March-April 2020.
+                    </p>
+                    <textarea id="contribute-data" readonly rows="10" cols="40"></textarea>
+                    <input id="modal-copy-control" disabled type="button" value="Copy to clipboard" class="btn">
+                    <span id="modal-copy-message" hidden>Copied!</span>
+                </li>
+                <li>
+                    <p>
+                        Fill in the data collection form at:
+                        <a href="https://portail.emse.fr/limesurvey/index.php/742256/lang-en">
+                            https://portail.emse.fr/limesurvey/index.php/742256/lang-en
+                        </a>
+                    </p>
+                </li>
+            </ol>
+        </div>
     </div>
     <script type="text/javascript" src="network.js"></script>
 </body>

@@ -122,7 +122,7 @@ contribCtl.onclick = () => {
 
     if (contribData.textContent.length == 0) {
         let begin = new Date("2020-03-01");
-        let end = new Date("2020-03-31");
+        let end = new Date("2020-04-30");
 
         navigation(begin, end)
 

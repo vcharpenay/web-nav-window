@@ -16,8 +16,8 @@
         .btn {
             padding: 5pt;
             border: 0;
-            border-right: 5pt solid darkorange;
-            background-color: orange;
+            border-right: 5pt solid hsl(55, 100%, 45%);
+            background-color: hsl(55, 100%, 50%);
             font-family: monospace;
         }
 
@@ -26,7 +26,7 @@
         }
 
         .btn:active:enabled {
-            background-color: darkorange;
+            background-color: hsl(55, 100%, 45%);
             border-right: 0;
             border-left: 5pt solid white;
         }
@@ -132,6 +132,12 @@
             happens when you navigate to different pages but on the same
             website.
         </p>
+        <p>
+            <i>
+                Any question or suggestion?
+                <a href="mailto:victor.charpenay@emse.fr">Contact us</a>!
+            </i>
+        </p>
     </div>
     <!-- TODO reactive UI: if small screen: graph below explainer -->
     <div id="nav-graph"></div>
@@ -156,9 +162,9 @@
             <ol>
                 <li>
                     <p>
-                        Copy the raw data below to clipboard. It corresponds to your
-                        navigation data extracted from your browser over the period
-                        March-April 2020.
+                        Copy the raw data below to clipboard. It corresponds to
+                        navigation data extracted from your browser over the
+                        period March-April 2020.
                     </p>
                     <textarea id="contribute-data" readonly rows="10" cols="40"></textarea>
                     <input id="modal-copy-control" disabled type="button" value="Copy to clipboard" class="btn">

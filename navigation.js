@@ -38,35 +38,6 @@ function pathNavigation(fromUrl, toUrl) {
     }
 }
 
-function isSubpathNavigation(fromUrl, toUrl) {
-    return toUrl.path != fromUrl.path
-        && toUrl.path.includes(fromUrl.path);
-}
-
-function isSiblingNavigation(fromUrl, toUrl) {
-    let fromPath = fromUrl.path;
-    let toPath = toUrl.path;
-
-    let fromIdx = fromPath.lastIndexOf('/');
-    let toIdx = toPath.lastIndexOf('/');
-
-    return fromIdx > -1 && toIdx > -1
-        && fromPath.substring(0, fromIdx) == toPath.substring(0, toIdx)
-        && fromPath.substring(fromIdx) != toPath.substring(toIdx);
-}
-
-function isFragmentNavigation(fromUrl, toUrl) {
-    return toUrl.path == fromUrl.path
-        && toUrl.query == fromUrl.query
-        && toUrl.fragment != fromUrl.fragment;
-}
-
-function isQueryNavigation(fromUrl, toUrl) {
-    return toUrl.path == fromUrl.path
-        && toUrl.fragment == fromUrl.fragment
-        && toUrl.query != fromUrl.query;
-}
-
 function type(dn) {
     let q = encodeURI(typeQuery.replace(/\{dn\}/g, dn));
 
@@ -232,25 +203,67 @@ function navigation(begin, end) {
 
 function anonymized(graph) {
     webnav.log('Anonymize navigation graph...\n'
-        + '\t1. Retrieve website class on Wikidata, if any\n'
-        + '\t2. Keep only top-level domain names and website class');
+        + '\t1. Build domain name hierarchy and keep parent/child relation\n'
+        + '\t2. Retrieve website class on Wikidata, if any [skipped]\n'
+        + '\t3. Keep only top-level domain names and website class');
+        
+    let root = {
+        name: '',
+        children: []
+    };
+
+    let inc = -1;
+
+    // build domain name tree
+    graph.nodes.forEach(n => {
+        n.dn.split('.').reverse().reduce((parent, name, i, h) => {
+            let child = parent.children.find(c => c.name == name);
+
+            if (!child) {
+                child = { id: inc--, level: i, name: name, children: [] };
+                parent.children.push(child);
+            }
+
+            if (i == h.length - 1) child.value = n;
+
+            return child;
+        }, root);
+    });
+
+    // add pointers to child nodes if they exist
+    let indexRec = treeNode => {
+        // index only if under TLD
+        if (treeNode.level > 1) {
+            let id = treeNode.id;
+            // if parent is not in browser history, id
+            // helps retain information about siblings
+            if (treeNode.value) id = treeNode.value.id;
+    
+            treeNode.children.forEach(c => {
+                if (c.value) c.value.parent = id;
+            });
+        }
+
+        treeNode.children.forEach(indexRec);
+    };
+
+    indexRec(root);
 
     let promises = [];
 
     graph.nodes.forEach(n => {
         let dn = n.dn;
 
+         // TODO make query more efficient (or load in background)
+
         // let p = type(dn) // TODO aggregate for 5-10 entities
         // .then(t => {
         //     n.type = t;
         //     webnav.log(`Found the following types for ${dn}: ${t}.`);
         // });
-
-        let p = Promise.resolve(); // TODO make query more efficient (or load in background)
+        let p = Promise.resolve();
 
         promises.push(p);
-
-        // TODO retain info on sub-domains
 
         n.dn = '*.' + topLevel(dn);
     });

@@ -40,6 +40,21 @@
             margin: 10px;
         }
 
+        #explainer-source-node {
+            stroke: hsl(55, 100%, 40%);
+            fill: hsl(55, 100%, 50%);
+        }
+
+        #explainer-other-node {
+            stroke: hsl(205, 100%, 40%);
+            fill: hsl(205, 100%, 50%);
+        }
+
+        #explainer-unknown-node {
+            stroke: hsl(55, 20%, 70%);
+            fill: hsl(55, 20%, 80%);
+        }
+
         #nav-graph {
             position: absolute;
             top: 0;
@@ -105,7 +120,7 @@
         <p>
             This extension is also part of a research project on hypermedia
             systems, whose objective is to collect (anonymized) navigation data.
-            This navigation data will then be analized to compare human browsing
+            This navigation data will then be analyzed to compare human browsing
             behaviors with the behavior of autonoumous Web agents ("bots").
         </p>
         <h2>How does it work?</h2>
@@ -132,6 +147,37 @@
             happens when you navigate to different pages but on the same
             website.
         </p>
+        <p>Nodes are colored depending on how navigation started:</p>
+        <ul>
+            <li>
+                Yellow nodes
+                (<svg id="explainer-source-node" width="10" height="10">
+                    <circle cx="5" cy="5" r="5"/>
+                </svg>)
+                mark navigation start. They can be your
+                browser's home page, a bookmark or a page loaded after typing
+                a keyword in the address bar.
+            </li>
+            <li>
+                Blue nodes
+                (<svg id="explainer-other-node" width="10" height="10">
+                    <circle cx="5" cy="5" r="5"/>
+                </svg>)
+                are websites reached after browsing, generally by following a
+                link.
+            </li>
+            <li>
+                Gray nodes
+                (<svg id="explainer-unknown-node" width="10" height="10">
+                    <circle cx="5" cy="5" r="5"/>
+                </svg>)
+                are similar to blue nodes but the origin of navigation is
+                unknown. This happens e.g. when you follow a link from another
+                application such as your e-mail client or when you open a new
+                tab when following a link.
+            </li>
+        </ul>
+        <hr>
         <p>
             <i>
                 Any question or suggestion?
@@ -166,20 +212,25 @@
                         navigation data extracted from your browser over the
                         period March-April 2020.
                     </p>
-                    <textarea id="contribute-data" readonly rows="10" cols="40"></textarea>
+                    <textarea id="contribute-data" readonly rows="10" cols="40">Loading...</textarea>
                     <input id="modal-copy-control" disabled type="button" value="Copy to clipboard" class="btn">
                     <span id="modal-copy-message" hidden>Copied!</span>
                 </li>
                 <li>
                     <p>
-                        Open a basic text editor and paste the raw data in a
-                        file terminating with ".json".
+                        Open a new file in a plain text editor. 
                     </p>
                     <ul>
-                        <li>On Windows, open e.g. Notepad</li>
-                        <li>On Mac, open e.g. TextEdit</li>
-                        <li>On Linux/Ubuntu, open e.g. Gedit</li>
-                    </ul> 
+                        <li>On Windows, use e.g. Notepad</li>
+                        <li>On Mac, use e.g. TextEdit</li>
+                        <li>On Linux/Ubuntu, use e.g. Gedit</li>
+                    </ul>
+                </li>
+                <li>
+                    <p>
+                        Paste the raw data in the opened file. Save the file
+                        with filename ending with ".json" (e.g. "data.json").
+                    </p>
                 </li>
                 <li>
                     <p>

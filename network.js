@@ -14,12 +14,18 @@ const closeCtl = document.getElementById('modal-close-control');
 function render(e, g) {
     webnav.log('Build view from navigation graph...');
 
-    let nodes = g.nodes.map(n => ({
-        id: n.id,
-        label: n.dn,
-        value: n.pages,
-        group: n.start ? 0 : 1
-    }));
+    let nodes = g.nodes.map(n => {
+        let group = 'unknown'; // unknown anchor
+        if (n.start) group = 'source'; // source of some navigation
+        else if (g.edges.some(e => e.to == n.id)) group = 'other'; // part of a navigation
+
+        return {
+            id: n.id,
+            label: n.dn,
+            value: n.pages,
+            group: group
+        };
+    });
     
     let edgeIndex = {};
     let edges = g.edges.reduce((edges, e) => {
@@ -54,6 +60,26 @@ function render(e, g) {
             arrows: {
                 to: {
                     enabled: true
+                }
+            }
+        },
+        groups: {
+            unknown: {
+                color: {
+                    border: 'hsl(55, 20%, 70%)',
+                    background: 'hsl(55, 20%, 80%)'
+                }
+            },
+            source: {
+                color: {
+                    border: 'hsl(55, 100%, 40%)',
+                    background: 'hsl(55, 100%, 50%)'
+                }
+            },
+            other: {
+                color: {
+                    border: 'hsl(205, 100%, 40%)',
+                    background: 'hsl(205, 100%, 50%)'
                 }
             }
         }
@@ -120,7 +146,7 @@ anonCtl.onclick = () => {
 contribCtl.onclick = () => {
     overlay.hidden = false;
 
-    if (contribData.textContent.length == 0) {
+    if (contribData.textContent == 'Loading...') {
         let begin = new Date("2020-03-01");
         let end = new Date("2020-04-30");
 

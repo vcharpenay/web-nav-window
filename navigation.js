@@ -16,6 +16,57 @@ function topLevel(dn) {
     return dn.substring(i + 1);
 }
 
+function pathNavigation(fromUrl, toUrl) {
+    let fromPath = fromUrl.path;
+    let toPath = toUrl.path;
+
+    if (toPath == fromPath) return 'self';
+
+    if (toPath.includes(fromPath)) return 'subpath';
+    else if (fromPath.includes(toPath)) return 'subpath_inverse';
+
+    let fromIdx = fromPath.lastIndexOf('/');
+    let toIdx = toPath.lastIndexOf('/');
+
+    if (fromIdx > -1 && toIdx > -1) {
+        let fromParent = fromPath.substring(0, fromIdx);
+        let fromLeaf = fromPath.substring(fromIdx);
+        let toParent = toPath.substring(0, toIdx);
+        let toLeaf = toPath.substring(toIdx);
+
+        if (fromParent == toParent && fromLeaf != toLeaf) return 'sibling';
+    }
+}
+
+function isSubpathNavigation(fromUrl, toUrl) {
+    return toUrl.path != fromUrl.path
+        && toUrl.path.includes(fromUrl.path);
+}
+
+function isSiblingNavigation(fromUrl, toUrl) {
+    let fromPath = fromUrl.path;
+    let toPath = toUrl.path;
+
+    let fromIdx = fromPath.lastIndexOf('/');
+    let toIdx = toPath.lastIndexOf('/');
+
+    return fromIdx > -1 && toIdx > -1
+        && fromPath.substring(0, fromIdx) == toPath.substring(0, toIdx)
+        && fromPath.substring(fromIdx) != toPath.substring(toIdx);
+}
+
+function isFragmentNavigation(fromUrl, toUrl) {
+    return toUrl.path == fromUrl.path
+        && toUrl.query == fromUrl.query
+        && toUrl.fragment != fromUrl.fragment;
+}
+
+function isQueryNavigation(fromUrl, toUrl) {
+    return toUrl.path == fromUrl.path
+        && toUrl.fragment == fromUrl.fragment
+        && toUrl.query != fromUrl.query;
+}
+
 function type(dn) {
     let q = encodeURI(typeQuery.replace(/\{dn\}/g, dn));
 
@@ -86,10 +137,7 @@ function navigation(begin, end) {
         webnav.log('Aggregate history items by domain name...');
 
         let dnIndex = {};
-        let itemIndex = {};
         let navIndex = {};
-
-        let tmpIndex = {};
     
         let dns = [];
         let nav = [];
@@ -98,13 +146,9 @@ function navigation(begin, end) {
 
         let promises = h.map(item => {
             let dn = domainName(item.url);
-            itemIndex[item.id] = dn;
-
-            tmpIndex[item.id] = item;
+            item.dn = dn;
     
             // TODO replay history with the same profile (cookies) and monitor network
-
-            // TODO provide statistics on same-host navigation (e.g. hash-URI or sub-resource)
 
             if (dn) {
                 if (!dnIndex[dn]) {
@@ -116,8 +160,12 @@ function navigation(begin, end) {
                 dnIndex[dn].pages++;
     
                 return visits(item.url, begin, end)
-                // index visits by ID
-                .then(v => v.forEach(visit => navIndex[visit.visitId] = visit));
+                .then(v => v.forEach(visit => {
+                    // index visits by ID
+                    navIndex[visit.visitId] = visit;
+                    // add reference to history item from visit
+                    visit.item = item;
+                }));
             }
         });
     
@@ -125,6 +173,8 @@ function navigation(begin, end) {
         .then(() => {
             webnav.log(`Collected ${dns.length} domain names.`);
             webnav.log('Build edge list (i.e. link traversals) by domain name...');
+
+            // TODO instead of scanning navIndex, build edges on-the-fly while building nodes (chronologically ordered list?)
 
             Object.keys(navIndex).forEach(key => {
                 let transition = navIndex[key].transition;
@@ -134,14 +184,28 @@ function navigation(begin, end) {
                     let from = navIndex[to.referringVisitId];
 
                     if (from) {
-                        nav.push({
-                            from: dnIndex[itemIndex[from.id]].id,
-                            to: dnIndex[itemIndex[to.id]].id,
+                        let navObj = {
+                            from: dnIndex[from.item.dn].id,
+                            to: dnIndex[to.item.dn].id,
                             hctl: transition,
                             t: to.visitTime
-                        });
+                        };
+
+                        if (from.item.dn == to.item.dn) {
+                            let fromUrl = URI.parse(from.item.url);
+                            let toUrl = URI.parse(to.item.url);
+
+                            navObj.path = pathNavigation(fromUrl, toUrl);
+
+                            if (navObj.path == 'self') {
+                                navObj.hash = fromUrl.fragment != toUrl.fragment;
+                                navObj.q = fromUrl.query != toUrl.query;
+                            }
+                        }
+
+                        nav.push(navObj);
                     } else {
-                        console.error(tmpIndex[to.id]);
+                        console.error(to.item);
                         console.error(to); // FIXME link traversal without anchor?
                         // possible cause:
                         // - hash URI (from same resource path)
@@ -151,7 +215,7 @@ function navigation(begin, end) {
                         // - opened in new tab
                     }
                 } else if (startTransitions.includes(transition)) {
-                    let dnStart = itemIndex[navIndex[key].id];
+                    let dnStart = navIndex[key].item.dn;
                     dnIndex[dnStart].start = transition;
                 }
             });
@@ -185,6 +249,8 @@ function anonymized(graph) {
         let p = Promise.resolve(); // TODO make query more efficient (or load in background)
 
         promises.push(p);
+
+        // TODO retain info on sub-domains
 
         n.dn = '*.' + topLevel(dn);
     });

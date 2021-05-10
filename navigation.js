@@ -98,8 +98,8 @@ function navigation(begin, end) {
 
     return browser.history.search({
         text: '',
-        startTime: begin,
-        endTime: end,
+        startTime: begin.getTime(),
+        endTime: end.getTime(),
         maxResults: 1000000 // TODO any limit?
     })
 

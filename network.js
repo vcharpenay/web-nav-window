@@ -3,6 +3,7 @@ const beginCtl = document.getElementById('begin-control');
 const endCtl = document.getElementById('end-control');
 const renderCtl = document.getElementById('render-control');
 const renderMsg = document.getElementById('render-message');
+const noDataMsg = document.getElementById('no-data-message');
 const anonCtl = document.getElementById('anonymize-control');
 const contribCtl = document.getElementById('contribute-control');
 const contribData = document.getElementById('contribute-data');
@@ -117,7 +118,10 @@ endCtl.onchange = beginCtl.onchange;
 renderCtl.onclick = () => {
     Promise.resolve()
 
-    .then(() => renderMsg.hidden = false)
+    .then(() => {
+        renderMsg.hidden = false;
+        noDataMsg.hidden = true;
+    })
 
     .then(() => {
         if (webnav.graph) {
@@ -136,6 +140,11 @@ renderCtl.onclick = () => {
     
     .then(() => {
         webnav.viz.on('stabilizationIterationsDone', () => renderMsg.hidden = true);
+
+        if (webnav.graph.nodes.length == 0) {
+            renderMsg.hidden = true;
+            noDataMsg.hidden = false;
+        }
     });
 };
 

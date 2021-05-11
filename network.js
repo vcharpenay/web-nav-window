@@ -82,14 +82,20 @@ function render(e, g) {
                     background: 'hsl(205, 100%, 50%)'
                 }
             }
+        },
+        layout: {
+            improvedLayout: false
+        },
+        physics: {
+            stabilization: {
+                iterations: 200
+            }
         }
     };
 
     webnav.log('Render view...');
     
-    let network = new vis.Network(e, data, options);
-
-    // TODO get notified when layouting has finished 
+    webnav.viz = new vis.Network(e, data, options);
 }
 
 beginCtl.onchange = () => {
@@ -128,7 +134,9 @@ renderCtl.onclick = () => {
 
     .then(() => render(container, webnav.graph))
     
-    .then(() => renderMsg.hidden = true);
+    .then(() => {
+        webnav.viz.on('stabilizationIterationsDone', () => renderMsg.hidden = true);
+    });
 };
 
 anonCtl.onclick = () => {

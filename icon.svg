@@ -72,18 +72,19 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="132.57846"
-     inkscape:cy="92.434556"
+     inkscape:cx="89.76589"
+     inkscape:cy="92.431355"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
      units="px"
-     inkscape:window-width="1920"
-     inkscape:window-height="1015"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     showguides="false">
+     inkscape:window-width="849"
+     inkscape:window-height="666"
+     inkscape:window-x="930"
+     inkscape:window-y="188"
+     inkscape:window-maximized="0"
+     showguides="false"
+     inkscape:pagecheckerboard="false">
     <inkscape:grid
        type="xygrid"
        id="grid815" />
@@ -105,6 +106,13 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-242.76041)">
+    <ellipse
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path1048-1-2"
+       ry="14.400883"
+       rx="14.646576"
+       cy="269.6723"
+       cx="28.712471" />
     <ellipse
        style="fill:url(#linearGradient845);fill-opacity:1;stroke:#ffea01;stroke-width:10.58333302;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path817-0"

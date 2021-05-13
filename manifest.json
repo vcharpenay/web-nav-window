@@ -11,8 +11,7 @@
       }
     },
     "permissions": [
-        "history",
-        "activeTab"
+        "history"
     ],
     "web_accessible_resources": [
         "ui.html",

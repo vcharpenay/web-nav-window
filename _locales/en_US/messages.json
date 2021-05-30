@@ -6,13 +6,13 @@
         "message": "What is it for?"
     },
     "what_is_it_for_answer_1": {
-        "message": "The Web navigation window is a \"window\" to the way you navigate on the Web. It's a browser extension that visualizes your browser history as a graph. By following the paths you take on the Web, you can see what website you visit the most, where your navigation usually starts and how it ends."
+        "message": "The Web navigation window is a \"window\" to the way you navigate on the Web. It's a browser extension that renders your browser history as a graph. By following the paths you take on the Web, you can see what website you visit the most, where your navigation usually starts and how it ends."
     },
     "what_is_it_for_answer_2": {
         "message": "This extension is also part of a research project on hypermedia systems, whose objective is to collect (anonymized) navigation data. The data will then be used to compare human browsing behaviors with the behavior of autonoumous Web agents (\"bots\")."
     },
     "how_does_it_work": {
-        "message": "How does it work?"
+        "message": "How to use it?"
     },
     "how_does_it_work_answer_1": {
         "message": "Select a time period (with the date pickers at the bottom of the page) and click \"Render\"."
@@ -53,6 +53,15 @@
     "end_control_label": {
         "message": "To"
     },
+    "render_control": {
+        "message": "Render"
+    },
+    "anonymize_control": {
+        "message": "Anonymize"
+    },
+    "contribute_control": {
+        "message": "Contribute!"
+    },
     "render_message": {
         "message": "Rendering..."
     },
@@ -68,7 +77,10 @@
     "modal_to_contribute_step_1": {
         "message": "Copy the raw data below to clipboard. It corresponds to navigation data extracted from your browser over the period March-April 2020."
     },
-    "contribute_data": {
+    "modal_copy_control": {
+        "message": "Copy to clipboard"
+    },
+    "modal_render_message": {
         "message": "Loading..."
     },
     "modal_copy_message": {

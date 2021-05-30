@@ -9,9 +9,10 @@ const contribCtl = document.getElementById('contribute-control');
 const contribData = document.getElementById('contribute-data');
 
 const overlay = document.getElementById('overlay');
-const copyCtl = document.getElementById('modal-copy-control');
-const copyMsg = document.getElementById('modal-copy-message');
-const closeCtl = document.getElementById('modal-close-control');
+const modalCopyCtl = document.getElementById('modal-copy-control');
+const modalRenderMsg = document.getElementById('modal-render-message');
+const modalCopyMsg = document.getElementById('modal-copy-message');
+const modalCloseCtl = document.getElementById('modal-close-control');
 
 function render(e, g) {
     webnav.log('Build view from navigation graph...');
@@ -164,7 +165,7 @@ anonCtl.onclick = () => {
 contribCtl.onclick = () => {
     overlay.hidden = false;
 
-    if (contribData.textContent == 'Loading...') {
+    if (contribData.textContent == '') {
         let begin = new Date("2020-03-01");
         let end = new Date("2020-04-30");
 
@@ -174,30 +175,41 @@ contribCtl.onclick = () => {
     
         .then(g => {
             contribData.textContent = JSON.stringify(g);
-            copyCtl.disabled = false;
+            modalCopyCtl.disabled = false;
+            modalRenderMsg.hidden = true;
         });
     }
 };
 
-copyCtl.onclick = () => {
+modalCopyCtl.onclick = () => {
     navigator.clipboard.writeText(contribData.textContent)
     
-    .then(() => copyMsg.hidden = false);
+    .then(() => modalCopyMsg.hidden = false);
 };
 
-closeCtl.onclick = () => {
+modalCloseCtl.onclick = () => {
     overlay.hidden = true;
-    copyMsg.hidden = true;
+    modalCopyMsg.hidden = true;
 };
 
 // i18n: populate all text elements with messages in the proper locale
-let elements = document.getElementsByClassName('localized-text');
 
 webnav.log(`Detected locale: ${browser.i18n.getUILanguage()}.`);
 
-for (let i = 0; i < elements.length; i++) {
-    let e = elements[i];
-
+let textForElement = e => {
     let id = e.id.replace(/-/g, '_');
-    e.innerHTML = browser.i18n.getMessage(id);
+    return browser.i18n.getMessage(id);
+};
+
+let textElements = document.getElementsByClassName('localized-text');
+let inputElements = document.getElementsByClassName('localized-control');
+
+for (let i = 0; i < textElements.length; i++) {
+    let e = textElements[i];
+    e.innerHTML = textForElement(e);
+}
+
+for (let i = 0; i < inputElements.length; i++) {
+    let e = inputElements[i];
+    e.value = textForElement(e);
 }

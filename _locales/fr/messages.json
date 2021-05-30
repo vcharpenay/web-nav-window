@@ -12,10 +12,10 @@
         "message": "Cette extension fait aussi partie d'un projet de recherche sur les systèmes hypermédias, dont l'objectif est de collecter des données (anonymisées) de navigation. Ces données seront ensuite utilisées pour comparer les comportements humains de navigation avec ceux d'agents web autonomes (\"bots\")."
     },
     "how_does_it_work": {
-        "message": "Comment ça fonctionne ?"
+        "message": "Comment l'utiliser ?"
     },
     "how_does_it_work_answer_1": {
-        "message": "Sélectionner une période (avec les champs de sélection de date en bas de page) et cliquer sur \"\"."
+        "message": "Sélectionner une période (avec les champs de sélection de date en bas de page) et cliquer sur \"Visualiser\"."
     },
     "how_does_it_work_answer_2": {
         "message": "Après un certain temps de traitement, vous devriez voir apparaître un graphe dans le cadre principal. Pour explorer ce graphe, vous pouvez zoomer (molette) et translater le graphe (clic gauche)."
@@ -53,8 +53,17 @@
     "end_control_label": {
         "message": "Au"
     },
+    "render_control": {
+        "message": "Visualiser"
+    },
+    "anonymize_control": {
+        "message": "Anonymiser"
+    },
+    "contribute_control": {
+        "message": "Contribuer !"
+    },
     "render_message": {
-        "message": ""
+        "message": "Traitement en cours..."
     },
     "no_data_message": {
         "message": "<i>(pas de données sur la période sélectionnée)</i>"
@@ -68,8 +77,11 @@
     "modal_to_contribute_step_1": {
         "message": "Copier les données brutes ci-dessous dans le presse-papier. Elles correspondent aux données de navigation extraites de votre navigateur sur la période mars-avril 2020."
     },
-    "contribute_data": {
-        "message": "Chargement..."
+    "modal_copy_control": {
+        "message": "Copier dans les presse-papier"
+    },
+    "modal_render_message": {
+        "message": "Traitement en cours..."
     },
     "modal_copy_message": {
         "message": "Copié !"

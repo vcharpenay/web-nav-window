@@ -6,7 +6,7 @@
         "message": "Qu'est-ce que c'est ?"
     },
     "what_is_it_for_answer_1": {
-        "message": "Le hublot de navigation web est une fenêtre sur la manière dont vous naviguez sur le web. C'est une extension de navigateur qui visualise votre historique de navigation en tant que graphe. En suivant les chemins que vous prenez sur le web, vous pouvez voir quel site vous visitez le plus, où votre navigation commence de manière générale et comment elle s'arrête."
+        "message": "Le hublot de navigation web est une « fenêtre » sur la manière dont vous naviguez sur le web. C'est une extension de navigateur qui visualise votre historique de navigation en tant que graphe. En suivant les chemins que vous prenez sur le web, vous pouvez voir quel site vous visitez le plus, où votre navigation commence de manière générale et comment elle s'arrête."
     },
     "what_is_it_for_answer_2": {
         "message": "Cette extension fait aussi partie d'un projet de recherche sur les systèmes hypermédias, dont l'objectif est de collecter des données (anonymisées) de navigation. Ces données seront ensuite utilisées pour comparer les comportements humains de navigation avec ceux d'agents web autonomes (\"bots\")."
@@ -15,7 +15,7 @@
         "message": "Comment l'utiliser ?"
     },
     "how_does_it_work_answer_1": {
-        "message": "Sélectionner une période (avec les champs de sélection de date en bas de page) et cliquer sur \"Visualiser\"."
+        "message": "Sélectionner une période (avec les champs de sélection de date en bas de page) et cliquer sur 'Visualiser'."
     },
     "how_does_it_work_answer_2": {
         "message": "Après un certain temps de traitement, vous devriez voir apparaître un graphe dans le cadre principal. Pour explorer ce graphe, vous pouvez zoomer (molette) et translater le graphe (clic gauche)."
@@ -27,7 +27,7 @@
         "message": "Comment interpréter le graphe ?"
     },
     "how_to_interpret_the_graph_answer_1": {
-        "message": "Ce graphe est un « graphe de navigation » : chaque site web que vous avez visité s'affiche comme un nœud et il y a un arc entre deux nœuds pour chaque lien sur lequel vous avez cliqué."
+        "message": "Ce graphe est un « graphe de navigation » : chaque site web que vous avez visité s'affiche comme un nœud et deux nœuds sont reliés par un arc pour chaque lien sur lequel vous avez cliqué."
     },
     "how_to_interpret_the_graph_answer_2": {
         "message": "Certains arcs forment une boucle sur un même nœud : cela signifie que avez navigué vers une page différente mais sur le même site web."
@@ -36,7 +36,7 @@
         "message": "La couleur des nœuds indique comment la navigation a été initiée :"
     },
     "how_to_interpret_the_graph_answer_3_yellow_nodes": {
-        "message": "Les nœuds jaunes (<svg id=\"explainer-source-node\" width=\"10\" height=\"10\"><circle cx=\"5\" cy=\"5\" r=\"5\"/></svg>) marque le début d'une navigation. Ils peuvent représenter la page d'accueil de votre navigateur, un marque-page ou un site atteint après avoir tapé des mots-clés dans la barre de recherche."
+        "message": "Les nœuds jaunes (<svg id=\"explainer-source-node\" width=\"10\" height=\"10\"><circle cx=\"5\" cy=\"5\" r=\"5\"/></svg>) marquent le début d'une navigation. Ils peuvent représenter la page d'accueil de votre navigateur, un marque-page ou un site atteint après avoir tapé des mots-clés dans la barre de recherche."
     },
     "how_to_interpret_the_graph_answer_3_blue_nodes": {
         "message": "Les nœuds bleus (<svg id=\"explainer-other-node\" width=\"10\" height=\"10\"><circle cx=\"5\" cy=\"5\" r=\"5\"/></svg>) sont les sites atteints indirectement lors d'une navigation, généralement après avoir cliqué sur un lien."
@@ -60,7 +60,7 @@
         "message": "Anonymiser"
     },
     "contribute_control": {
-        "message": "Contribuer !"
+        "message": "Contribuer"
     },
     "render_message": {
         "message": "Traitement en cours..."
@@ -78,7 +78,7 @@
         "message": "Copier les données brutes ci-dessous dans le presse-papier. Elles correspondent aux données de navigation extraites de votre navigateur sur la période avril-mai 2021."
     },
     "modal_copy_control": {
-        "message": "Copier dans les presse-papier"
+        "message": "Copier"
     },
     "modal_render_message": {
         "message": "Traitement en cours..."

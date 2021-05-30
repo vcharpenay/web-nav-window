@@ -1,9 +1,10 @@
 {
     "manifest_version": 2,
     "version": "0.2",
-    "name": "Web Navigation Window",
+    "default_locale": "en_US",
+    "name": "__MSG_extension_name__",
     "browser_action": {
-      "default_title": "Web Navigation Window",
+      "default_title": "__MSG_extension_name__",
       "default_icon": {
           "16": "icon-16.png",
           "32": "icon-32.png",

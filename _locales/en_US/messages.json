@@ -1,0 +1,95 @@
+{
+    "extension_name": {
+        "message": "Web Navigation Window"
+    },
+    "what_is_it_for": {
+        "message": "What is it for?"
+    },
+    "what_is_it_for_answer_1": {
+        "message": "The Web navigation window is a \"window\" to the way you navigate on the Web. It's a browser extension that visualizes your browser history as a graph. By following the paths you take on the Web, you can see what website you visit the most, where your navigation usually starts and how it ends."
+    },
+    "what_is_it_for_answer_2": {
+        "message": "This extension is also part of a research project on hypermedia systems, whose objective is to collect (anonymized) navigation data. The data will then be used to compare human browsing behaviors with the behavior of autonoumous Web agents (\"bots\")."
+    },
+    "how_does_it_work": {
+        "message": "How does it work?"
+    },
+    "how_does_it_work_answer_1": {
+        "message": "Select a time period (with the date pickers at the bottom of the page) and click \"Render\"."
+    },
+    "how_does_it_work_answer_2": {
+        "message": "After some processing time, you should see a graph appear in the main panel. Zoom in and out (mouse wheel) and drag the graph around (left click) to explore."
+    },
+    "how_does_it_work_warning": {
+        "message": "<em>Warning</em>: processing your history over long periods of time (one month or longer) may take some time."
+    },
+    "how_to_interpret_the_graph": {
+        "message": "How to interpret the graph?"
+    },
+    "how_to_interpret_the_graph_answer_1": {
+        "message": "This graph is a \"navigation graph\": every website you've visited is displayed as a node and there's an arc between two nodes for every link you've clicked."
+    },
+    "how_to_interpret_the_graph_answer_2": {
+        "message": "Some of the arcs start and end on the same node: this happens when you navigate to different pages but on the same website."
+    },
+    "how_to_interpret_the_graph_answer_3": {
+        "message": "Nodes are colored depending on how navigation started:"
+    },
+    "how_to_interpret_the_graph_answer_3_yellow_nodes": {
+        "message": "Yellow nodes (<svg id=\"explainer-source-node\" width=\"10\" height=\"10\"><circle cx=\"5\" cy=\"5\" r=\"5\"/></svg>) mark navigation start. They can be your browser's home page, a bookmark or a page loaded after typing a keyword in the address bar."
+    },
+    "how_to_interpret_the_graph_answer_3_blue_nodes": {
+        "message": "Blue nodes (<svg id=\"explainer-other-node\" width=\"10\" height=\"10\"><circle cx=\"5\" cy=\"5\" r=\"5\"/></svg>) are websites reached after browsing, generally by following a link."
+    },
+    "how_to_interpret_the_graph_answer_3_gray_nodes": {
+        "message": "Gray nodes (<svg id=\"explainer-unknown-node\" width=\"10\" height=\"10\"><circle cx=\"5\" cy=\"5\" r=\"5\"/></svg>) are similar to blue nodes but the origin of navigation is unknown. This happens e.g. when you follow a link from another application such as your e-mail client or when you open a new tab when following a link."
+    },
+    "any_question_or_suggestion": {
+        "message": "Any question or suggestion? <a href=\"mailto:victor.charpenay@emse.fr\">Contact us</a>!"
+    },
+    "begin_control_label": {
+        "message": "From"
+    },
+    "end_control_label": {
+        "message": "To"
+    },
+    "render_message": {
+        "message": "Rendering..."
+    },
+    "no_data_message": {
+        "message": "<i>(no data for the selected period)</i>"
+    },
+    "modal_close_control": {
+        "message": "Close"
+    },
+    "modal_to_contribute": {
+        "message": "To contribute, you can share a fragment of your (anonymized) browser history."
+    },
+    "modal_to_contribute_step_1": {
+        "message": "Copy the raw data below to clipboard. It corresponds to navigation data extracted from your browser over the period March-April 2020."
+    },
+    "contribute_data": {
+        "message": "Loading..."
+    },
+    "modal_copy_message": {
+        "message": "Copied!"
+    },
+    "modal_to_contribute_step_2": {
+        "message": "Open a new file in a plain text editor."
+    },
+    "modal_to_contribute_step_2_windows": {
+        "message": "On Windows, use e.g. Notepad"
+    },
+    "modal_to_contribute_step_2_mac": {
+        "message": "On Mac, use e.g. TextEdit"
+    },
+    "modal_to_contribute_step_2_linux": {
+        "message": "On Linux/Ubuntu, use e.g. Gedit"
+    },
+    "modal_to_contribute_step_3": {
+        "message": "Paste the raw data in the opened file. Save the file with filename ending with \".json\" (e.g. \"data.json\")."
+    },
+    "modal_to_contribute_step_4": {
+        "message": "Fill in the data collection form at: <a href=\"https://portail.emse.fr/limesurvey/index.php/644842/lang-en\">https://portail.emse.fr/limesurvey/index.php/644842/lang-en</a>"
+    }
+}

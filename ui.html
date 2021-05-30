@@ -108,50 +108,53 @@
 
 <body>
     <div id="explainer">
-        <h1>Web Navigation Window</h1>
-        <h2>What is it for?</h2>
-        <p>
+        <h1 id="extension-name" class="localized-text">Web Navigation Window</h1>
+        <h2 id="what-is-it-for" class="localized-text">What is it for?</h2>
+        <p id="what-is-it-for-answer-1" class="localized-text">
             The Web navigation window is a "window" to the way you navigate on
             the Web. It's a browser extension that visualizes your browser
             history as a graph. By following the paths you take on the Web, you
             can see what website you visit the most, where your navigation
             usually starts and how it ends.
         </p>
-        <p>
+        <p id="what-is-it-for-answer-2" class="localized-text">
             This extension is also part of a research project on hypermedia
             systems, whose objective is to collect (anonymized) navigation data.
             The data will then be analyzed to compare human browsing behaviors
             with the behavior of autonoumous Web agents ("bots").
         </p>
-        <h2>How does it work?</h2>
+        <h2 id="how-does-it-work" class="localized-text">How does it work?</h2>
         <ol>
-            <li>
+            <li id="how-does-it-work-answer-1" class="localized-text">
                 Select a time period (with the date pickers at the bottom of the
                 page) and click "Render".
             </li>
-            <li>
+            <li id="how-does-it-work-answer-2" class="localized-text">
                 After some processing time, you should see a graph appear in the
                 main panel. Zoom in and out (mouse wheel) and drag the graph
                 around (left click) to explore.
             </li>
         </ol>
-        <p>
+        <p id="how-does-it-work-warning" class="localized-text">
             <em>Warning</em>: processing your history over long periods of time
             (one month or longer) may take some time.
         </p>
-        <h2>How to interpret the graph?</h2>
-        <p>
+        <h2 id="how-to-interpret-the-graph" class="localized-text">How to interpret the graph?</h2>
+        <p id="how-to-interpret-the-graph-answer-1" class="localized-text">
             This graph is a "navigation graph": every website you've visited is
             displayed as a node and there's an arc for every link you've
             clicked.
-        </p><p>
+        </p>
+        <p id="how-to-interpret-the-graph-answer-2" class="localized-text">
             Some of the arcs start and end on the same node: this
             happens when you navigate to different pages but on the same
             website.
         </p>
-        <p>Nodes are colored depending on how navigation started:</p>
+        <p id="how-to-interpret-the-graph-answer-3" class="localized-text">
+            Nodes are colored depending on how navigation started:
+        </p>
         <ul>
-            <li>
+            <li id="how-to-interpret-the-graph-answer-3-yellow-nodes" class="localized-text">
                 Yellow nodes
                 (<svg id="explainer-source-node" width="10" height="10">
                     <circle cx="5" cy="5" r="5"/>
@@ -160,7 +163,7 @@
                 browser's home page, a bookmark or a page loaded after typing
                 a keyword in the address bar.
             </li>
-            <li>
+            <li id="how-to-interpret-the-graph-answer-3-blue-nodes" class="localized-text">
                 Blue nodes
                 (<svg id="explainer-other-node" width="10" height="10">
                     <circle cx="5" cy="5" r="5"/>
@@ -168,7 +171,7 @@
                 are websites reached after browsing, generally by following a
                 link.
             </li>
-            <li>
+            <li id="how-to-interpret-the-graph-answer-3-gray-nodes" class="localized-text">
                 Gray nodes
                 (<svg id="explainer-unknown-node" width="10" height="10">
                     <circle cx="5" cy="5" r="5"/>
@@ -181,7 +184,7 @@
         </ul>
         <hr>
         <p>
-            <i>
+            <i id="any-question-or-suggestion" class="localized-text">
                 Any question or suggestion?
                 <a href="mailto:victor.charpenay@emse.fr">Contact us</a>!
             </i>
@@ -190,53 +193,53 @@
     <!-- TODO reactive UI: if small screen: graph below explainer -->
     <div id="nav-graph"></div>
     <div id="controls">
-        <span>From</span>
+        <span id="begin-control-label" class="localized-text">From</span>
         <input id="begin-control" type="date" value="2020-02-01">
-        <span>To</span>
+        <span id="end-control-label" class="localized-text">To</span>
         <input id="end-control" type="date" value="2020-02-02">
         <input id="render-control" type="button" value="Render" class="btn">
         <input id="anonymize-control" type="button" value="Anonymize" class="btn">
         <input id="contribute-control" type="button" value="Contribute!" class="btn">
-        <span id="render-message" hidden>Rendering...</span>
-        <span id="no-data-message" hidden><i>(no data for the selected period)</i></span>
+        <span id="render-message" class="localized-text" hidden>Rendering...</span>
+        <span id="no-data-message" class="localized-text" hidden><i>(no data for the selected period)</i></span>
     </div>
     <div id="overlay" hidden>
         <div id="modal">
-            <span id="modal-close-control">Close</span>
+            <span id="modal-close-control" class="localized-text">Close</span>
             <br>
-            <p>
+            <p id="modal-to-contribute" class="localized-text">
                 To contribute, you can share a fragment of your (anonymized)
                 browser history.
             </p>
             <ol>
                 <li>
-                    <p>
+                    <p id="modal-to-contribute-step-1" class="localized-text">
                         Copy the raw data below to clipboard. It corresponds to
                         navigation data extracted from your browser over the
                         period March-April 2020.
                     </p>
-                    <textarea id="contribute-data" readonly rows="10" cols="40">Loading...</textarea>
+                    <textarea id="contribute-data" class="localized-text" readonly rows="10" cols="40">Loading...</textarea>
                     <input id="modal-copy-control" disabled type="button" value="Copy to clipboard" class="btn">
-                    <span id="modal-copy-message" hidden>Copied!</span>
+                    <span id="modal-copy-message" class="localized-text" hidden>Copied!</span>
                 </li>
                 <li>
-                    <p>
+                    <p id="modal-to-contribute-step-2" class="localized-text">
                         Open a new file in a plain text editor. 
                     </p>
                     <ul>
-                        <li>On Windows, use e.g. Notepad</li>
-                        <li>On Mac, use e.g. TextEdit</li>
-                        <li>On Linux/Ubuntu, use e.g. Gedit</li>
+                        <li id="modal-to-contribute-step-2-windows" class="localized-text">On Windows, use e.g. Notepad</li>
+                        <li id="modal-to-contribute-step-2-mac" class="localized-text">On Mac, use e.g. TextEdit</li>
+                        <li id="modal-to-contribute-step-2-linux" class="localized-text">On Linux/Ubuntu, use e.g. Gedit</li>
                     </ul>
                 </li>
                 <li>
-                    <p>
+                    <p id="modal-to-contribute-step-3" class="localized-text">
                         Paste the raw data in the opened file. Save the file
                         with filename ending with ".json" (e.g. "data.json").
                     </p>
                 </li>
                 <li>
-                    <p>
+                    <p id="modal-to-contribute-step-4" class="localized-text">
                         Fill in the data collection form at:
                         <a href="https://portail.emse.fr/limesurvey/index.php/644842/lang-en">
                             https://portail.emse.fr/limesurvey/index.php/644842/lang-en
@@ -246,7 +249,7 @@
             </ol>
         </div>
     </div>
-    <script type="text/javascript" src="network.js"></script>
+    <script type="text/javascript" src="controls.js"></script>
 </body>
 
 </html>

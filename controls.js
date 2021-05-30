@@ -7,6 +7,7 @@ const noDataMsg = document.getElementById('no-data-message');
 const anonCtl = document.getElementById('anonymize-control');
 const contribCtl = document.getElementById('contribute-control');
 const contribData = document.getElementById('contribute-data');
+
 const overlay = document.getElementById('overlay');
 const copyCtl = document.getElementById('modal-copy-control');
 const copyMsg = document.getElementById('modal-copy-message');
@@ -188,3 +189,15 @@ closeCtl.onclick = () => {
     overlay.hidden = true;
     copyMsg.hidden = true;
 };
+
+// i18n: populate all text elements with messages in the proper locale
+let elements = document.getElementsByClassName('localized-text');
+
+webnav.log(`Detected locale: ${browser.i18n.getUILanguage()}.`);
+
+for (let i = 0; i < elements.length; i++) {
+    let e = elements[i];
+
+    let id = e.id.replace(/-/g, '_');
+    e.innerHTML = browser.i18n.getMessage(id);
+}

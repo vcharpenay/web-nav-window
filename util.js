@@ -13,11 +13,12 @@ if (typeof chrome != 'undefined') {
                     chrome.history.getVisits(url, v => ok(v));
                 });
             }
-        }
+        },
+        i18n: chrome.i18n
     };
 }
 
-// global object for unified logigng
+// global object for unified logging
 webnav = {
     log: (msg) => console.log(`[${new Date().toISOString()}] ${msg}`)
 };

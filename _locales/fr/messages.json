@@ -1,12 +1,12 @@
 {
     "extension_name": {
-        "message": "Hublot de navigation web"
+        "message": "Web Navigation Window"
     },
     "what_is_it_for": {
         "message": "Qu'est-ce que c'est ?"
     },
     "what_is_it_for_answer_1": {
-        "message": "Le hublot de navigation web est une « fenêtre » sur la manière dont vous naviguez sur le web. C'est une extension de navigateur qui visualise votre historique de navigation en tant que graphe. En suivant les chemins que vous prenez sur le web, vous pouvez voir quel site vous visitez le plus, où votre navigation commence de manière générale et comment elle s'arrête."
+        "message": "L'extension Web Navigation Window est une « fenêtre » sur la manière dont vous naviguez sur le web. C'est une extension de navigateur qui visualise votre historique de navigation en tant que graphe. En suivant les chemins que vous prenez sur le web, vous pouvez voir quel site vous visitez le plus, où votre navigation commence de manière générale et comment elle s'arrête."
     },
     "what_is_it_for_answer_2": {
         "message": "Cette extension fait aussi partie d'un projet de recherche sur les systèmes hypermédias, dont l'objectif est de collecter des données (anonymisées) de navigation. Ces données seront ensuite utilisées pour comparer les comportements humains de navigation avec ceux d'agents web autonomes (\"bots\")."

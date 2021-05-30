@@ -102,6 +102,6 @@
         "message": "Coller les données brutes dans le fichier ouvert. Sauvegarder le fichier avec un nom de fichier se terminant par '.json' (par exemple, 'donnees.json')"
     },
     "modal_to_contribute_step_4": {
-        "message": "Remplir le formulaire de collecte de données sur <a href=\"https://portail.emse.fr/limesurvey/index.php/644842/lang-en\">https://portail.emse.fr/limesurvey/index.php/644842/lang-en</a>"
+        "message": "Remplir le formulaire de collecte de données sur <a href=\"https://portail.emse.fr/limesurvey/index.php/644842/lang-fr\">https://portail.emse.fr/limesurvey/index.php/644842/lang-fr</a>"
     }
 }

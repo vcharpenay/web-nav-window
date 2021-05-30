@@ -96,6 +96,10 @@
             resize: none;
         }
 
+        #modal-controls {
+            margin-top: 10px;
+        }
+
         #modal-close-control {
             width: 100%;
             display: inline-block;
@@ -156,9 +160,12 @@
                 <li>
                     <p id="modal-to-contribute-step-1" class="localized-text"></p>
                     <textarea id="contribute-data" readonly rows="10" cols="40"></textarea>
-                    <input id="modal-copy-control" disabled type="button" class="btn localized-control">
-                    <span id="modal-render-message" class="localized-text"></span>
-                    <span id="modal-copy-message" class="localized-text" hidden></span>
+                    <br>
+                    <div id="modal-controls">
+                        <input id="modal-copy-control" disabled type="button" class="btn localized-control">
+                        <span id="modal-render-message" class="localized-text"></span>
+                        <span id="modal-copy-message" class="localized-text" hidden></span>
+                    </div>
                 </li>
                 <li>
                     <p id="modal-to-contribute-step-2" class="localized-text"></p>

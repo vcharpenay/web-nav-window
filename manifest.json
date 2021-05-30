@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "version": "0.2",
+    "version": "0.3",
     "default_locale": "en_US",
     "name": "__MSG_extension_name__",
     "browser_action": {

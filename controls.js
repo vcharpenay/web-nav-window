@@ -101,15 +101,22 @@ function render(e, g) {
     webnav.viz = new vis.Network(e, data, options);
 }
 
-beginCtl.onchange = () => {
+beginCtl.onchange = e => {
     let begin = new Date(beginCtl.value);
     let end = new Date(endCtl.value);
 
     if (begin > end) {
+        let diff = 24 * 3600 * 1000; // nb of ms in one day
+
+        // shift end date
+        if (e.target == beginCtl) end = new Date(begin.getTime() + diff);
+        // shift begin date
+        else if (e.target == endCtl) begin = new Date(end.getTime() - diff);
+
         let toString = d => d.toISOString().split('T')[0];
 
-        beginCtl.value = toString(end);
-        endCtl.value = toString(begin);
+        beginCtl.value = toString(begin);
+        endCtl.value = toString(end);
     }
 
     webnav.graph = null; // refresh navigation graph

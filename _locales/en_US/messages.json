@@ -75,7 +75,7 @@
         "message": "To contribute, you can share a fragment of your (anonymized) browser history."
     },
     "modal_to_contribute_step_1": {
-        "message": "Copy the raw data below to clipboard. It corresponds to navigation data extracted from your browser over the period March-April 2020."
+        "message": "Copy the raw data below to clipboard. It corresponds to navigation data extracted from your browser over the period April-May 2021."
     },
     "modal_copy_control": {
         "message": "Copy to clipboard"
